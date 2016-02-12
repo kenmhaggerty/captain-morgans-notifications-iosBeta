@@ -54,7 +54,7 @@ describe(@"FISPiratesDataStore", ^{
             expect(dataStore).to.beKindOf([FISPiratesDataStore class]);
         });
         it(@"should intercept attempts to alloc init", ^{
-            expect(dataStore).to.equal([[FISPiratesDataStore alloc] init]);
+            expect(dataStore).to.equal([FISPiratesDataStore sharedPiratesDataStore]); // [[FISPiratesDataStore alloc] init]
         });
     });
  

@@ -24,6 +24,9 @@ static NSString *const CellIdentifier = @"shipCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView setAccessibilityLabel:@"ShipsTableView"];
+    [self.tableView setAccessibilityIdentifier:@"ShipsTableView"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -58,7 +61,7 @@ static NSString *const CellIdentifier = @"shipCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSArray *ships = [self.pirate.ships allObjects];
+    NSArray *ships = [[self.pirate.ships allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     Ship *currentShip = ships[indexPath.row];
     
     cell.textLabel.text = currentShip.name;

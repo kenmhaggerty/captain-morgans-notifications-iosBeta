@@ -57,7 +57,7 @@ describe(@"FISShipDetailViewController", ^{
         
         Pirate *pirate = store.pirates[0];
         
-        shipDetailVC.ship = [pirate.ships allObjects][0];
+        shipDetailVC.ship = [[pirate.ships allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]][0];
         [shipDetailVC setupLabels]; //You shouldn't be calling viewDidLoad yourself, so put the setup of your labels in an alternative method and then call it from viewDidLoad.
     });
     

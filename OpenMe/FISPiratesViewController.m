@@ -22,6 +22,10 @@ static NSString *const CellIdentifier = @"pirateCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView setAccessibilityLabel:@"PiratesTableView"];
+    [self.tableView setAccessibilityIdentifier:@"PiratesTableView"];
+    
     self.store = [FISPiratesDataStore sharedPiratesDataStore];
 }
 

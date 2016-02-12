@@ -23,15 +23,20 @@
 {
     [super viewDidLoad];
     
-    self.shipNameLabel.text = self.ship.name;
-    self.pirateNameLabel.text = self.ship.pirate.name;
-    self.propTypeLabel.text = self.ship.engine.engineType;
+    [self setupLabels];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupLabels
+{
+    self.shipNameLabel.text = self.ship.name;
+    self.pirateNameLabel.text = self.ship.pirate.name;
+    self.propTypeLabel.text = self.ship.engine.engineType;
 }
 
 @end

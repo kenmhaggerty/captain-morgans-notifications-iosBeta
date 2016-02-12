@@ -71,7 +71,7 @@ describe(@"FISAddShipViewController", ^{
             
             expect(^{
                 [tester tapViewWithAccessibilityLabel:@"saveButton"];
-            }).to.notify(DataStoreSaveNotification);
+            }).to.notify(NSManagedObjectContextDidSaveNotification); // DataStoreSaveNotification
         });
     });
     
