@@ -13,7 +13,11 @@
 + (instancetype)shipFromDictionary:(NSDictionary *)dictionary
                        andContext:(NSManagedObjectContext *)context
 {
-    return nil;
+    Ship *ship = [NSEntityDescription insertNewObjectForEntityForName:@"Ship" inManagedObjectContext:context];
+    [ship setName:dictionary[@"name"]];
+    [ship setEngine:dictionary[@"engine"]];
+    [ship setPirate:dictionary[@"pirate"]];
+    return ship;
 }
 
 @end

@@ -13,7 +13,9 @@
 + (instancetype)pirateFromDictionary:(NSDictionary *)dictionary
                          andContext:(NSManagedObjectContext *)context
 {
-    return nil;
+    Pirate *pirate = [NSEntityDescription insertNewObjectForEntityForName:@"Pirate" inManagedObjectContext:context];
+    [pirate setName:dictionary[@"name"]];
+    return pirate;
 }
 
 @end
