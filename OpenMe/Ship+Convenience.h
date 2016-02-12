@@ -8,6 +8,8 @@
 
 #import "Ship.h"
 
+#define NOTIFICATION_CREATE_SHIP @"kNotification_CreateShip"
+
 @interface Ship (Convenience)
 
 + (instancetype)shipFromDictionary:(NSDictionary *)dictionary

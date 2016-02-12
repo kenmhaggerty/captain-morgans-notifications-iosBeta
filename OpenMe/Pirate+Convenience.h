@@ -8,6 +8,8 @@
 
 #import "Pirate.h"
 
+#define NOTIFICATION_CREATE_PIRATE @"kNotification_CreatePirate"
+
 @interface Pirate (Convenience)
 
 + (instancetype)pirateFromDictionary:(NSDictionary *)dictionary

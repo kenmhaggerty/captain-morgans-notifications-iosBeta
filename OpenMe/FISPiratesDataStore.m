@@ -7,8 +7,9 @@
 //
 
 #import "FISPiratesDataStore.h"
-#import "Ship.h"
+#import "Ship+Convenience.h"
 #import "Engine.h"
+#import "Pirate+Convenience.h"
 
 @interface FISPiratesDataStore ()
 typedef NS_ENUM(NSInteger, EngineType) {
@@ -28,6 +29,8 @@ typedef NS_ENUM(NSInteger, EngineType) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedPiratesDataStore = [[FISPiratesDataStore alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:_sharedPiratesDataStore selector:@selector(createPirateFromNotification:) name:NOTIFICATION_CREATE_PIRATE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:_sharedPiratesDataStore selector:@selector(createShipFromNotification:) name:NOTIFICATION_CREATE_SHIP object:nil];
     });
 
     return _sharedPiratesDataStore;
@@ -45,6 +48,12 @@ typedef NS_ENUM(NSInteger, EngineType) {
             abort();
         }
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CREATE_PIRATE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CREATE_SHIP object:nil];
 }
 
 #pragma mark - Core Data stack
@@ -141,4 +150,22 @@ typedef NS_ENUM(NSInteger, EngineType) {
         [self generateTestData];
     }
 }
+
+- (void)createPirateFromNotification:(NSNotification *)notification
+{
+    Pirate *pirate = [Pirate pirateFromDictionary:notification.userInfo andContext:self.managedObjectContext];
+    [self save];
+}
+
+- (void)createShipFromNotification:(NSNotification *)notification
+{
+    Engine *engine = [NSEntityDescription insertNewObjectForEntityForName:@"Engine" inManagedObjectContext:self.managedObjectContext];
+    [engine setEngineType:notification.userInfo[@"engineType"]];
+    NSMutableDictionary *dictionary = [notification.userInfo mutableCopy];
+    [dictionary removeObjectForKey:@"engineType"];
+    [dictionary setObject:engine forKey:@"engine"];
+    Ship *ship = [Ship shipFromDictionary:dictionary andContext:self.managedObjectContext];
+    [self save];
+}
+
 @end
