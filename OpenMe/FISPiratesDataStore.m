@@ -160,10 +160,10 @@ typedef NS_ENUM(NSInteger, EngineType) {
 - (void)createShipFromNotification:(NSNotification *)notification
 {
     Engine *engine = [NSEntityDescription insertNewObjectForEntityForName:@"Engine" inManagedObjectContext:self.managedObjectContext];
-    [engine setEngineType:notification.userInfo[@"engineType"]];
+    [engine setEngineType:notification.userInfo[KEY_ENGINETYPE]];
     NSMutableDictionary *dictionary = [notification.userInfo mutableCopy];
-    [dictionary removeObjectForKey:@"engineType"];
-    [dictionary setObject:engine forKey:@"engine"];
+    [dictionary removeObjectForKey:KEY_ENGINETYPE];
+    [dictionary setObject:engine forKey:KEY_ENGINE];
     Ship *ship = [Ship shipFromDictionary:dictionary andContext:self.managedObjectContext];
     [self save];
 }

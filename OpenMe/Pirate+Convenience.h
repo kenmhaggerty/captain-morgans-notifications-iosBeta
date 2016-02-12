@@ -9,6 +9,7 @@
 #import "Pirate.h"
 
 #define NOTIFICATION_CREATE_PIRATE @"kNotification_CreatePirate"
+#define KEY_NAME @"name"
 
 @interface Pirate (Convenience)
 

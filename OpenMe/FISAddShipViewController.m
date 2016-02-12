@@ -7,9 +7,10 @@
 //
 
 #import "FISAddShipViewController.h"
-#import "FISPiratesDataStore.h"
-#import "Ship.h"
-#import "Engine.h"
+//#import "FISPiratesDataStore.h"
+//#import "Ship.h"
+//#import "Engine.h"
+#import "Ship+Convenience.h"
 
 @interface FISAddShipViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *shipNameField;
@@ -33,15 +34,18 @@
 }
 
 - (IBAction)saveButtonTapped:(id)sender {
-    FISPiratesDataStore *store = [FISPiratesDataStore sharedPiratesDataStore];
-    Ship *newShip = [NSEntityDescription insertNewObjectForEntityForName:@"Ship" inManagedObjectContext:store.managedObjectContext];
-    newShip.name = self.shipNameField.text;
-    newShip.engine = [NSEntityDescription insertNewObjectForEntityForName:@"Engine" inManagedObjectContext:store.managedObjectContext];
-    newShip.engine.engineType = self.engineTypeField.text;
+//    FISPiratesDataStore *store = [FISPiratesDataStore sharedPiratesDataStore];
+//    Ship *newShip = [NSEntityDescription insertNewObjectForEntityForName:@"Ship" inManagedObjectContext:store.managedObjectContext];
+//    newShip.name = self.shipNameField.text;
+//    newShip.engine = [NSEntityDescription insertNewObjectForEntityForName:@"Engine" inManagedObjectContext:store.managedObjectContext];
+//    newShip.engine.engineType = self.engineTypeField.text;
+//    
+//    [self.pirate addShipsObject:newShip];
+//    
+//    [store save];
     
-    [self.pirate addShipsObject:newShip];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CREATE_SHIP object:nil userInfo:@{KEY_NAME : self.shipNameField.text, KEY_ENGINETYPE : self.engineTypeField.text, KEY_PIRATE : self.pirate}];
     
-    [store save];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

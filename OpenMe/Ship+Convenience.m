@@ -14,9 +14,9 @@
                        andContext:(NSManagedObjectContext *)context
 {
     Ship *ship = [NSEntityDescription insertNewObjectForEntityForName:@"Ship" inManagedObjectContext:context];
-    [ship setName:dictionary[@"name"]];
-    [ship setEngine:dictionary[@"engine"]];
-    [ship setPirate:dictionary[@"pirate"]];
+    [ship setName:dictionary[KEY_NAME]];
+    [ship setEngine:dictionary[KEY_ENGINE]];
+    [ship setPirate:dictionary[KEY_PIRATE]];
     return ship;
 }
 

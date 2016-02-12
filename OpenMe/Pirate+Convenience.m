@@ -14,7 +14,7 @@
                          andContext:(NSManagedObjectContext *)context
 {
     Pirate *pirate = [NSEntityDescription insertNewObjectForEntityForName:@"Pirate" inManagedObjectContext:context];
-    [pirate setName:dictionary[@"name"]];
+    [pirate setName:dictionary[KEY_NAME]];
     return pirate;
 }
 
